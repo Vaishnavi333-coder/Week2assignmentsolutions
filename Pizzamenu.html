@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Italian Pizza Order</title>
+</head>
+<body>
+
+<h1>WELCOME TO ITALIAN PIZZA!</h1>
+<p>We deliver pizza in 40 minutes max. If not - Pizza's on us!</p>
+
+<form action="#" method="post">
+
+  <label for="email">Email:</label><br>
+  <input type="email" id="email" name="email" required><br><br>
+
+  <label>Phone:</label><br>
+  <input type="tel" name="area" placeholder="Area">
+  <input type="tel" name="local1" placeholder="Local">
+  <input type="tel" name="local2" placeholder="Local"><br><br>
+
+  <label for="slices">Number of slices:</label><br>
+  <input type="number" id="slices" name="slices" min="1"><br><br>
+
+  <fieldset>
+    <legend>Pizza Size</legend>
+    <input type="radio" id="size8" name="size" value="8" checked>
+    <label for="size8">8-inch</label>
+    <input type="radio" id="size10" name="size" value="10">
+    <label for="size10">10-inch</label>
+    <input type="radio" id="size12" name="size" value="12">
+    <label for="size12">12-inch</label>
+    <input type="radio" id="size14" name="size" value="14">
+    <label for="size14">14-inch</label>
+  </fieldset><br>
+
+  <fieldset>
+    <legend>Toppings</legend>
+    <input type="checkbox" id="pepperoni" name="topping" value="pepperoni">
+    <label for="pepperoni">Pepperoni</label>
+    <input type="checkbox" id="onions" name="topping" value="onions">
+    <label for="onions">Onions</label>
+    <input type="checkbox" id="mushrooms" name="topping" value="mushrooms">
+    <label for="mushrooms">Mushrooms</label>
+    <input type="checkbox" id="sausage" name="topping" value="sausage">
+    <label for="sausage">Sausage</label>
+  </fieldset><br>
+
+  <input type="checkbox" id="agree" name="agree" required>
+  <label for="agree">I agree to the TERMS AND CONDITIONS</label><br><br>
+
+  <button type="submit">Order Now</button>
+
+</form>
+
+</body>
+</html>
