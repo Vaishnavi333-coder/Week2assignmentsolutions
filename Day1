@@ -1,0 +1,137 @@
+<!-- pizzamenu.html -->
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Italian Pizza Order</title>
+</head>
+<body>
+
+<h1>WELCOME TO ITALIAN PIZZA!</h1>
+<p>We deliver pizza in 40 minutes max. If not - Pizza's on us!</p>
+<form action="#" method="post">
+
+  <label for="email">Email:</label><br>
+  <input type="email" id="email" name="email" required><br><br>
+
+  <label>Phone:</label><br>
+  <input type="tel" name="area" placeholder="Area">
+  <input type="tel" name="local1" placeholder="Local">
+  <input type="tel" name="local2" placeholder="Local"><br><br>
+
+  <label for="slices">Number of slices:</label><br>
+  <input type="number" id="slices" name="slices" min="1"><br><br>
+
+  <fieldset>
+    <legend>Pizza Size</legend>
+    <input type="radio" id="size8" name="size" value="8" checked>
+    <label for="size8">8-inch</label>
+    <input type="radio" id="size10" name="size" value="10">
+    <label for="size10">10-inch</label>
+    <input type="radio" id="size12" name="size" value="12">
+    <label for="size12">12-inch</label>
+    <input type="radio" id="size14" name="size" value="14">
+    <label for="size14">14-inch</label>
+  </fieldset><br>
+
+  <fieldset>
+    <legend>Toppings</legend>
+    <input type="checkbox" id="pepperoni" name="topping" value="pepperoni">
+    <label for="pepperoni">Pepperoni</label>
+    <input type="checkbox" id="onions" name="topping" value="onions">
+    <label for="onions">Onions</label>
+    <input type="checkbox" id="mushrooms" name="topping" value="mushrooms">
+    <label for="mushrooms">Mushrooms</label>
+    <input type="checkbox" id="sausage" name="topping" value="sausage">
+    <label for="sausage">Sausage</label>
+  </fieldset><br>
+
+  <input type="checkbox" id="agree" name="agree" required>
+  <label for="agree">I agree to the TERMS AND CONDITIONS</label><br><br>
+  <button type="submit">Order Now</button>
+
+</form>
+</body>
+</html>
+  
+  <!-- Payment_form.html -->
+  <!DOCTYPE html>
+<html>
+<head>
+  <title>Secure Payment Form</title>
+</head>
+<body>
+    <form action="Login.html" method="post">
+<table border="0" align="center" width="450" cellpadding="5" bgcolor="#ffffff">
+  <tr bgcolor="#66ccff">
+    <td colspan="2" align="center">
+      <b>🔒 This is a secure 128-bit SSL Encrypted payment. You're safe.</b>
+    </td>
+  </tr>
+
+  <tr>
+    <td colspan="2">
+      <input type="radio" name="payment" checked> Credit Card (Visa, Mastercard)
+      <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Visa.svg" width="35">
+      <img src="data:image/png;base64,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" width="35">
+      <br>
+      <input type="radio" name="payment"> PayPal
+      <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" width="60">
+    </td>
+  </tr>
+
+  <tr>
+    <td colspan="2">
+      <b>Card number</b><br>
+      <small>The 16 digits on front of your card</small><br>
+      <input type="text" size="45">
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      <b>Expiration date</b><br>
+      <select>
+        <option>Month</option>
+        <option>01</option><option>02</option><option>03</option>
+        <option>04</option><option>05</option><option>06</option>
+        <option>07</option><option>08</option><option>09</option>
+        <option>10</option><option>11</option><option>12</option>
+      </select>
+      <select>
+        <option>Year</option>
+        <option>2025</option><option>2026</option><option>2027</option>
+        <option>2028</option><option>2029</option><option>2030</option>
+      </select>
+    </td>
+    <td>
+      <b>CVV2/CVC2</b><br>
+      <input type="text" size="10" maxlength="3"><br>
+      <small>The last 3 digits on back of your card</small>
+    </td>
+  </tr>
+
+  <tr>
+    <td colspan="2">
+      <b>Full Name on a Card</b><br>
+      <input type="text" size="45">
+    </td>
+  </tr>
+
+  <tr>
+    <td colspan="2" align="center">
+      <font color="gray">You will be charged $29.00 every month</font>
+    </td>
+  </tr>
+
+  <tr>
+    <td colspan="2" align="center">
+      <input type="submit" value="Complete Transaction" 
+             style="background-color:orange; color:white; font-weight:bold; width:90%; height:35px; border:0;">
+    </td>
+  </tr>
+</table>
+</form>
+</body>
+</html>
