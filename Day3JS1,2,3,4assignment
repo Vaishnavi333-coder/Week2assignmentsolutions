@@ -1,0 +1,192 @@
+<!-- 1. Login form with validation with 3 attempts-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login page</title>
+</head>
+<body>
+
+        <input type="text" id="username" placeholder="username">
+        <input type="password" id="password" placeholder="password">
+        <button id="loginBtn" onclick="checkLogin()">Login</button>
+
+    <script>
+        let attempts=0;
+        const maxAttempts=3;
+        function checkLogin(){
+            const username=document.getElementById('username').value;
+            const password=document.getElementById('password').value;
+            if (username==='admin' && password==="123"){
+                alert("Login successful");
+            }else{
+                attempts++;
+                if(attempts >=maxAttempts){
+                    alert("Maximum login attempts reached");
+                    document.getElementById('loginBtn').disabled=true;
+                }else{
+                    alert(`Invalid credentials ${maxAttempts - attempts}attempts remaining`);
+                }
+            }
+            }
+        
+    </script>
+</body>
+</html>
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+<!--2.Product details-->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Product Details</title>
+  <style>
+    div {
+      border: 5px solid purple;
+      width: 350px;
+      padding: 15px;
+      font-family: Arial;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <h3>Product Details</h3>
+    Product Name: <input type="text" id="pname"><br><br>
+    Unit Price: <input type="number" id="price"><br><br>
+    Quantity: <input type="number" id="qty"><br><br>
+    <button onclick="calculateTotal()">Get Total</button>
+    <h4 id="result"></h4>
+  </div>
+
+  <script>
+    function calculateTotal() {
+      let name = document.getElementById("pname").value;
+      let price = parseFloat(document.getElementById("price").value);
+      let qty = parseInt(document.getElementById("qty").value);
+
+      if (confirm("Do you want to calculate the total amount for " + name + "?")) {
+        let total = price * qty;
+        let discount = 0;
+
+        if (qty > 30) discount = 0.20;
+        else if (qty > 20) discount = 0.15;
+        else if (qty > 10) discount = 0.10;
+
+        total = total - (total * discount);
+        document.getElementById("result").innerHTML = 
+          "Total Amount : " + total.toFixed(2);
+      } else {
+        document.getElementById("result").innerHTML = "Calculation Cancelled!";
+      }
+    }
+  </script>
+</body>
+</html>
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+<!-- 3. Meal Price – Add Tip (10%) and Tax (8%) -->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Meal Cost Calculator</title>
+  <style>
+    div {
+      border: 10px solid rgb(21, 128, 0);
+      width: 500px;
+      padding: 15px;
+      font-family: Arial;
+    
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <h3>Meal Cost Calculator</h3>
+    Base Cost: <input type="number" id="base"><br><br>
+    <button onclick="calcMeal()">Get Total</button>
+    <p id="output"></p>
+  </div>
+
+  <script>
+    function calcMeal() {
+      let base = parseFloat(document.getElementById("base").value);
+      let tip = base * 0.10;
+      let tax = base * 0.08;
+      let total = base + tip + tax;
+      total = Math.round(total);
+
+      document.getElementById("output").innerHTML = 
+        "Meal Base Cost : " + base.toFixed(2) + "<br>" +
+        "Tip Amount : " + tip.toFixed(2) + "<br>" +
+        "Tax Amount : " + tax.toFixed(2) + "<br>" +
+        "Total Amount : " + total;
+    }
+  </script>
+</body>
+</html>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+<!-- 4. Functions for Average, Power, and Word Count -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Functions Example</title>
+  <style>
+    div {
+      border: 5px solid rgb(0, 106, 255);
+      width: 350px;
+      padding: 15px;
+      margin-bottom: 20px;
+      font-family: Arial;
+      align-content: center;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <h3>Find Average</h3>
+    Total Marks: <input type="number" id="marks"><br><br>
+    No. of Subjects: <input type="number" id="subs"><br><br>
+    <button onclick="findAverage()">Find Average</button>
+    <p id="avg"></p>
+  </div>
+
+  <div>
+    <h3>Find Power (x<sup>y</sup>)</h3>
+    X: <input type="number" id="x"><br><br>  
+    Y: <input type="number" id="y"><br><br>
+    <button onclick="findPower()">Find Power</button>
+    <p id="pow"></p>
+  </div>
+
+  <div>
+    <h3>Word Count</h3>
+    Enter Text: <input type="text" id="text" style="width:200px"><br><br>
+    <button onclick="countWords()">Count Words</button>
+    <p id="words"></p>
+  </div>
+
+  <script>
+    function findAverage() {
+      let marks = parseFloat(document.getElementById("marks").value);
+      let subs = parseInt(document.getElementById("subs").value);
+      let avg = marks / subs;
+      document.getElementById("avg").innerHTML = "Average : " + avg.toFixed(2);
+    }
+
+    function findPower() {
+      let x = parseFloat(document.getElementById("x").value);
+      let y = parseFloat(document.getElementById("y").value);
+      let result = Math.pow(x, y);
+      document.getElementById("pow").innerHTML = "Result : " + result;
+    }
+
+    function countWords() {
+      let text = document.getElementById("text").value.trim();
+      let words = text === "" ? 0 : text.split(/\s+/).length;
+      document.getElementById("words").innerHTML = "Word Count : " + words;
+    }
+  </script>
+</body>
+</html>
