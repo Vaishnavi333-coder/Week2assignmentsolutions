@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Courses & Students Example</title>
+  <style>
+    body { font-family: Arial, Helvetica, sans-serif; padding: 20px; }
+    section { margin-bottom: 30px; }
+    .box { border: 1px solid #ddd; padding: 14px; border-radius: 6px; max-width: 900px; }
+    input[type="text"], select { padding: 6px; width: 250px; margin-right: 8px; }
+    button { padding: 6px 10px; margin-right: 6px; }
+    ul { margin-top: 10px; }
+    table { border-collapse: collapse; width: 100%; margin-top: 12px; }
+    th, td { border: 1px solid #ccc; padding: 8px 10px; text-align: left; }
+    th { background:#f4f4f4; }
+    .muted { color: #666; font-size: 0.9em; }
+  </style>
+</head>
+<body>
+  <h1>Courses & Students Demo</h1>
+
+  <section class="box" id="coursesBox">
+    <h2>1) Courses- Show / Add / Remove</h2>
+    <p class="muted">Use the textbox to add or remove a course. Click Show to display current courses.</p>
+
+    <div>
+      <input type="text" id="courseInput" placeholder="Enter course name">
+      <button id="showCourses">Show</button>
+      <button id="addCourse">Add</button>
+      <button id="removeCourse">Remove</button>
+      <span id="coursesMsg" class="muted"></span>
+    </div>
+
+    <ul id="coursesList"></ul>
+  </section>
+
+  <section class="box" id="studentsBox">
+    <h2>2) Students (array of objects) — Table view + Filter by course</h2>
+    <p class="muted">Filter the students table by course using the dropdown (uses filter()).</p>
+
+    <div>
+      <label for="courseFilter">Filter by course:</label>
+      <select id="courseFilter">
+        <option value="">-- All courses --</option>
+      </select>
+      <button id="applyFilter">Apply Filter</button>
+      <button id="resetFilter">Reset</button>
+    </div>
+
+    <table id="studentsTable">
+      <thead>
+        <tr><th>ID</th><th>Name</th><th>Age</th><th>Course</th></tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </section>
+
+  <script>
+    // --- Part 1: Courses array and UI ---
+    let courses = ["Mathematics", "Physics", "Chemistry"];
+
+    const courseInput = document.getElementById('courseInput');
+    const showBtn = document.getElementById('showCourses');
+    const addBtn = document.getElementById('addCourse');
+    const removeBtn = document.getElementById('removeCourse');
+    const coursesList = document.getElementById('coursesList');
+    const coursesMsg = document.getElementById('coursesMsg');
+
+    function renderCourses() {
+      // Clear list
+      coursesList.innerHTML = '';
+      if (courses.length === 0) {
+        const li = document.createElement('li');
+        li.textContent = '(no courses)';
+        coursesList.appendChild(li);
+        return;
+      }
+      courses.forEach(function(c) {
+        const li = document.createElement('li');
+        li.textContent = c;
+        coursesList.appendChild(li);
+      });
+    }
+
+    // Show: display courses in list format
+    showBtn.addEventListener('click', function() {
+      renderCourses();
+      coursesMsg.textContent = 'Displayed ' + courses.length + ' course(s)';
+      setTimeout(() => coursesMsg.textContent = '', 2500);
+    });
+
+    // Add: read from textbox and add to array (no duplicates, case-insensitive)
+    addBtn.addEventListener('click', function() {
+      const val = courseInput.value.trim();
+      if (!val) {
+        alert('Enter a course name to add');
+        return;
+      }
+      const exists = courses.some(c => c.toLowerCase() === val.toLowerCase());
+      if (exists) {
+        alert('Course already exists');
+        return;
+      }
+      courses.push(val);
+      renderCourses();
+      updateCourseFilterOptions();
+      courseInput.value = '';
+      coursesMsg.textContent = 'Added "' + val + '"';
+      setTimeout(() => coursesMsg.textContent = '', 2000);
+    });
+
+    // Remove: remove the course entered in textbox (case-insensitive)
+    removeBtn.addEventListener('click', function() {
+      const val = courseInput.value.trim();
+      if (!val) {
+        alert('Enter a course name to remove');
+        return;
+      }
+      const idx = courses.findIndex(c => c.toLowerCase() === val.toLowerCase());
+      if (idx === -1) {
+        alert('Course not found');
+        return;
+      }
+      const removed = courses.splice(idx, 1)[0];
+      renderCourses();
+      updateCourseFilterOptions();
+      courseInput.value = '';
+      coursesMsg.textContent = 'Removed "' + removed + '"';
+      setTimeout(() => coursesMsg.textContent = '', 2000);
+    });
+
+    // Render initial courses list
+    renderCourses();
+
+    // --- Part 2: Students array-of-objects and table ---
+    const students = [
+      { id: 1, name: 'Alice', age: 20, course: 'Mathematics' },
+      { id: 2, name: 'Bob', age: 22, course: 'Physics' },
+      { id: 3, name: 'Carol', age: 21, course: 'Chemistry' },
+      { id: 4, name: 'Dan', age: 23, course: 'Mathematics' },
+      { id: 5, name: 'Eve', age: 20, course: 'Physics' }
+    ];
+
+    const studentsTableBody = document.querySelector('#studentsTable tbody');
+    const courseFilter = document.getElementById('courseFilter');
+    const applyFilterBtn = document.getElementById('applyFilter');
+    const resetFilterBtn = document.getElementById('resetFilter');
+
+    function renderStudents(list) {
+      studentsTableBody.innerHTML = '';
+      if (!list || list.length === 0) {
+        const tr = document.createElement('tr');
+        const td = document.createElement('td');
+        td.colSpan = 4;
+        td.textContent = '(no students)';
+        td.className = 'muted';
+        tr.appendChild(td);
+        studentsTableBody.appendChild(tr);
+        return;
+      }
+      list.forEach(s => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = '<td>' + s.id + '</td>' +
+                       '<td>' + s.name + '</td>' +
+                       '<td>' + s.age + '</td>' +
+                       '<td>' + s.course + '</td>';
+        studentsTableBody.appendChild(tr);
+      });
+    }
+
+    // Populate course filter dropdown from courses array (unique)
+    function updateCourseFilterOptions() {
+      // Keep a copy of selected value
+      const selected = courseFilter.value;
+      // clear existing options except the first
+      courseFilter.innerHTML = '<option value="">-- All courses --</option>';
+      const unique = Array.from(new Set(courses));
+      unique.forEach(c => {
+        const opt = document.createElement('option');
+        opt.value = c;
+        opt.textContent = c;
+        courseFilter.appendChild(opt);
+      });
+      // restore selection if still present
+      courseFilter.value = selected;
+    }
+
+    // Initial render
+    renderStudents(students);
+    updateCourseFilterOptions();
+
+    // Apply Filter: use filter() to filter by selected course
+    applyFilterBtn.addEventListener('click', function() {
+      const sel = courseFilter.value;
+      if (!sel) {
+        renderStudents(students);
+        return;
+      }
+      const filtered = students.filter(s => s.course === sel);
+      renderStudents(filtered);
+    });
+
+    // Reset filter -> show all
+    resetFilterBtn.addEventListener('click', function() {
+      courseFilter.value = '';
+      renderStudents(students);
+    });
+
+  </script>
+</body>
+</html>
